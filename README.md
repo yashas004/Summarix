@@ -116,3 +116,10 @@ This project successfully demonstrates a deep learning-based video summarization
 -	OpenAI Whisper - Automatic Speech Recognition
 -	ResNet-50 - Deep Residual Learning Framework
 -	Hugging Face Transformers for NLP
+
+
+Mentored by: Prof. Mohit Kumar 
+Subject: Deep Learning
+-	Yashas Yadav - 22BCE8056
+-	Priyanka Das Poddar - 22BCE7965
+-	Suyash Agrawal - 22BCE8444
