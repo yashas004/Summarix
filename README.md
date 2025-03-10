@@ -17,92 +17,91 @@ This project leverages a rich combination of publicly available and custom datas
 
 #### 1. TVSum Dataset
 The TVSum dataset is a well-known benchmark in video summarization research. It comprises a diverse collection of YouTube videos that span multiple genres and topics. Key features include:
-●	Diverse Content: Videos range from news clips and documentaries to entertainment and sports, providing a comprehensive testbed.
-●	Human-Annotated Importance Scores: Each video is accompanied by frame-level importance scores, which have been annotated by human evaluators. These annotations serve as ground truth for identifying key segments.
-●	Benchmark Utility: With around 50 videos, TVSum challenges models to capture varying content dynamics and to generate summaries that align closely with human judgments.
+-	Diverse Content: Videos range from news clips and documentaries to entertainment and sports, providing a comprehensive testbed.
+-	Human-Annotated Importance Scores: Each video is accompanied by frame-level importance scores, which have been annotated by human evaluators. These annotations serve as ground truth for identifying key segments.
+-	Benchmark Utility: With around 50 videos, TVSum challenges models to capture varying content dynamics and to generate summaries that align closely with human judgments.
 
 #### 2. SumMe Dataset
 The SumMe dataset consists of 25 user-generated videos and is another popular benchmark in the summarization community. Its characteristics include:
-●	Manually Created Summaries: Each video comes with summaries that have been manually curated by multiple human annotators, ensuring high-quality ground truth data.
-●	Content Diversity: Although the dataset is smaller in size compared to TVSum, the videos cover a wide range of scenarios—from personal vlogs to event recordings—making it an excellent resource for testing model generalization.
-●	Detailed Annotations: The dataset includes detailed temporal annotations, which help in fine-tuning the model's ability to pinpoint key moments within the video timeline.
+-	Manually Created Summaries: Each video comes with summaries that have been manually curated by multiple human annotators, ensuring high-quality ground truth data.
+-	Content Diversity: Although the dataset is smaller in size compared to TVSum, the videos cover a wide range of scenarios—from personal vlogs to event recordings—making it an excellent resource for testing model generalization.
+-	Detailed Annotations: The dataset includes detailed temporal annotations, which help in fine-tuning the model's ability to pinpoint key moments within the video timeline.
 
 #### 3. YouTube Videos
 In addition to standardized datasets, the project incorporates a collection of YouTube videos to serve as test cases. This component is crucial for several reasons:
-●	Real-World Variability: Videos from YouTube come in various lengths, resolutions, and genres, reflecting the real-world challenges of video summarization.
-●	Audio-Visual Integration: These videos provide a practical scenario where both audio transcripts and visual content must be processed, enabling the evaluation of the model’s multimodal capabilities.
-●	Scalability Testing: Using a wide array of YouTube videos helps in assessing how well the model generalizes to new, unseen data beyond curated benchmarks.
+-	Real-World Variability: Videos from YouTube come in various lengths, resolutions, and genres, reflecting the real-world challenges of video summarization.
+-	Audio-Visual Integration: These videos provide a practical scenario where both audio transcripts and visual content must be processed, enabling the evaluation of the model’s multimodal capabilities.
+-	Scalability Testing: Using a wide array of YouTube videos helps in assessing how well the model generalizes to new, unseen data beyond curated benchmarks.
 
 #### 4. Custom Video Set
 To further tailor the model for specific applications, a custom video set has been curated. This dataset includes:
-●	Domain-Specific Content: Videos have been selected from specific domains (e.g., educational lectures, surveillance footage, or conference talks) to fine-tune the model for targeted summarization tasks.
-●	High-Quality Annotations: Summaries and frame-level annotations for these videos have been prepared manually, ensuring that the model receives high-fidelity training data.
-●	Enhanced Validation: The custom set serves as an additional validation layer, allowing for the assessment of model performance under controlled conditions and supporting iterative improvements.
+-	Domain-Specific Content: Videos have been selected from specific domains (e.g., educational lectures, surveillance footage, or conference talks) to fine-tune the model for targeted summarization tasks.
+-	High-Quality Annotations: Summaries and frame-level annotations for these videos have been prepared manually, ensuring that the model receives high-fidelity training data.
+-	Enhanced Validation: The custom set serves as an additional validation layer, allowing for the assessment of model performance under controlled conditions and supporting iterative improvements.
 
 #### Integrated Dataset Benefits
 By combining these datasets, the project benefits from:
-●	Diverse Data Sources: The mix of professionally annotated benchmarks and real-world test cases allows the model to learn and generalize from a wide range of scenarios.
-●	Comprehensive Annotations: The presence of both frame-level importance scores and full-text human-generated summaries ensures that the model has multiple forms of supervisory signals.
-●	Robust Training and Evaluation: This diverse dataset ensemble provides the necessary variety and depth to train a robust video summarization system that can perform well on unseen video content.
+-	Diverse Data Sources: The mix of professionally annotated benchmarks and real-world test cases allows the model to learn and generalize from a wide range of scenarios.
+-	Comprehensive Annotations: The presence of both frame-level importance scores and full-text human-generated summaries ensures that the model has multiple forms of supervisory signals.
+-	Robust Training and Evaluation: This diverse dataset ensemble provides the necessary variety and depth to train a robust video summarization system that can perform well on unseen video content.
 
 
 ### Methodology
 The video summarization pipeline is divided into several key stages:
 
 #### 1. Video Acquisition & Preprocessing
-●	Video Downloading:
-
+-	Video Downloading:
 ○	Videos are downloaded from YouTube using robust tools like yt-dlp.
 ○	Output formats are standardized (e.g., converting .webm to .mp4 using FFmpeg).
-●	Frame Extraction:
 
+-	Frame Extraction:
 ○	OpenCV is used to extract frames from the standardized video at fixed intervals.
 ○	These frames represent snapshots of key moments in the video.
 
 #### 2. Feature Extraction
-●	Spatial Feature Extraction:
+-	Spatial Feature Extraction:
 ○	A pre-trained CNN (ResNet-50) processes each frame to extract high-level visual features.
-●	Temporal Analysis:
+-	Temporal Analysis:
 ○	A Bi-directional LSTM (Bi-LSTM) can be employed to capture the sequence and temporal relationships between frames.
-●	Optional Clustering:
+-	Optional Clustering:
 ○	K-Means clustering may be applied to group similar frames and select representative keyframes.
 
 #### 3. Speech-to-Text Conversion
-●	Audio Extraction:
+-	Audio Extraction:
 ○	The video’s audio track is separated using FFmpeg.
-●	Transcription:
+-	Transcription:
 ○	OpenAI’s Whisper model converts the audio to text, yielding a transcription that captures spoken content.
 
 #### 4. Text Summarization
-●	Summarization Model:
+-	Summarization Model:
 ○	Transformer-based models (e.g., Facebook BART) summarize the transcribed text.
 ○	The model generates a concise narrative that encapsulates the video’s main points.
 
 #### 5. Evaluation
-●	Automatic Metrics:
+-	Automatic Metrics:
 ○	ROUGE scores (ROUGE-1, ROUGE-2, and ROUGE-L) are calculated to evaluate the quality of the generated summary against ground-truth summaries.
-●	Qualitative Analysis:
+-	Qualitative Analysis:
 ○	Visualizations such as keyframe samples, spectrograms, and text previews are used to assess performance.
 
 
 ### Discussion
 
 #### Challenges Faced
-●	Data Variability:
+-	Data Variability:
  Handling varying video quality, lighting, and noise in both audio and visual data posed challenges.
-●	ASR Limitations:
+-	ASR Limitations:
  Speech-to-text conversion errors sometimes led to noisy transcripts that affected summarization quality.
-●	Computational Overhead:
+-	Computational Overhead:
  Processing high-resolution videos and running deep learning models requires significant computational resources.
 
 #### Possible Improvements
-●	Enhancing ASR Accuracy:
+-	Enhancing ASR Accuracy:
  Fine-tune the Whisper model on domain-specific audio to reduce transcription errors.
-●	Advanced Summarization Models:
+-	Advanced Summarization Models:
  Experiment with GPT-based summarization to generate more coherent and context-aware summaries.
-●	Multimodal Integration:
+-	Multimodal Integration:
  Combine visual and audio cues using attention mechanisms to create richer summaries.
-●	Real-Time Processing:
+-	Real-Time Processing:
  Optimize the pipeline for real-time summarization to support live video applications.
 
 
@@ -111,11 +110,11 @@ The video summarization pipeline is divided into several key stages:
 This project successfully demonstrates a deep learning-based video summarization system that efficiently condenses video content into a clear textual summary. The integration of CNNs for visual feature extraction, LSTMs for temporal modeling, and Transformer-based models for text summarization has resulted in an effective pipeline. While the system shows promising results, especially in terms of ROUGE metrics, future work will focus on enhancing transcription quality, multimodal integration, and real-time processing.
 
 #### Future Scope
-●	Real-Time Summarization:
+-	Real-Time Summarization:
  Further optimization to process streaming video data.
-●	Domain-Specific Customization:
+-	Domain-Specific Customization:
  Fine-tuning models for specific applications (e.g., educational videos, surveillance).
-●	Multi-Modal Fusion:
+- Multi-Modal Fusion:
  Incorporate additional features such as scene context and user interaction data to improve summary relevance.
 
 #### References:
