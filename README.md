@@ -50,33 +50,32 @@ By combining these datasets, the project benefits from:
 The video summarization pipeline is divided into several key stages:
 
 #### 1. Video Acquisition & Preprocessing
--	Video Downloading:
+- Video Downloading:
  - Videos are downloaded from YouTube using robust tools like yt-dlp.
  - Output formats are standardized (e.g., converting .webm to .mp4 using FFmpeg).
 
--	Frame Extraction:
-	 - OpenCV is used to extract frames from the standardized video at fixed intervals.
+- Frame Extraction:
+  - OpenCV is used to extract frames from the standardized video at fixed intervals.
   - These frames represent snapshots of key moments in the video.
 
 #### 2. Feature Extraction
--	Spatial Feature Extraction: A pre-trained CNN (ResNet-50) processes each frame to extract high-level visual features.
--	Temporal Analysis: A Bi-directional LSTM (Bi-LSTM) can be employed to capture the sequence and temporal relationships between frames.
--	Optional Clustering: K-Means clustering may be applied to group similar frames and select representative keyframes.
+- Spatial Feature Extraction: A pre-trained CNN (ResNet-50) processes each frame to extract high-level visual features.
+- Temporal Analysis: A Bi-directional LSTM (Bi-LSTM) can be employed to capture the sequence and temporal relationships between frames.
+- Optional Clustering: K-Means clustering may be applied to group similar frames and select representative keyframes.
 
 #### 3. Speech-to-Text Conversion
--	Audio Extraction: The video’s audio track is separated using FFmpeg.
--	Transcription:	OpenAI’s Whisper model converts the audio to text, yielding a transcription that captures spoken content.
+- Audio Extraction: The video’s audio track is separated using FFmpeg.
+- Transcription: OpenAI’s Whisper model converts the audio to text, yielding a transcription that captures spoken content.
 
 #### 4. Text Summarization
--	Summarization Model:
+- Summarization Model:
  - Transformer-based models (e.g., Facebook BART) summarize the transcribed text.
-	- The model generates a concise narrative that encapsulates the video’s main points.
+ - The model generates a concise narrative that encapsulates the video’s main points.
 
 #### 5. Evaluation
--	Automatic Metrics:
-	ROUGE scores (ROUGE-1, ROUGE-2, and ROUGE-L) are calculated to evaluate the quality of the generated summary against ground-truth summaries.
--	Qualitative Analysis:
-	Visualizations such as keyframe samples, spectrograms, and text previews are used to assess performance.
+- Automatic Metrics:
+  - ROUGE scores (ROUGE-1, ROUGE-2, and ROUGE-L) are calculated to evaluate the quality of the generated summary against ground-truth summaries.
+  - Qualitative Analysis: Visualizations such as keyframe samples, spectrograms, and text previews are used to assess performance.
 
 
 ### Discussion
