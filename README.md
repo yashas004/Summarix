@@ -119,7 +119,7 @@ This project successfully demonstrates a deep learning-based video summarization
 
 
 Mentored by: Prof. Mohit Kumar 
-Subject: Deep Learning
+
 -	Yashas Yadav - 22BCE8056
 -	Priyanka Das Poddar - 22BCE7965
 -	Suyash Agrawal - 22BCE8444
