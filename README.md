@@ -117,9 +117,7 @@ This project successfully demonstrates a deep learning-based video summarization
 -	ResNet-50 - Deep Residual Learning Framework
 -	Hugging Face Transformers for NLP
 
-
-Mentored by: Prof. Mohit Kumar 
+#### Team Members:
 
 -	Yashas Yadav - 22BCE8056
 -	Priyanka Das Poddar - 22BCE7965
--	Suyash Agrawal - 22BCE8444
